@@ -1,0 +1,10 @@
+# Configurações do pnpm para um projeto que mexe com carteiras.
+# Ataques recentes de supply chain no npm miraram justamente frontends cripto.
+
+# Não instala versões publicadas há menos de 24h (dá tempo de uma versão
+# maliciosa ser detectada e removida). Requer pnpm >= 10.16.
+minimumReleaseAge: 1440
+
+# Scripts de instalação (postinstall etc.) ficam bloqueados por padrão no pnpm 10.
+# Libere aqui só o que você revisou.
+onlyBuiltDependencies: []
