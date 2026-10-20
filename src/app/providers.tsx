@@ -11,8 +11,8 @@ type ProvidersProps = {
 }
 
 export function Providers({ children, initialState }: ProvidersProps) {
-  // useState garante uma instância por cliente (e nunca compartilhada entre
-  // requisições no servidor).
+  // useState guarantees one instance per client (never shared across
+  // requests on the server).
   const [config] = useState(() => getConfig())
   const [queryClient] = useState(() => new QueryClient())
 

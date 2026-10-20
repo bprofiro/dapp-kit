@@ -4,15 +4,15 @@ import { LiveDemo } from '@/components/demo/live-demo'
 import { PackageTabs } from '@/components/docs/package-tabs'
 
 export const metadata: Metadata = {
-  title: 'Integração com wagmi',
+  title: 'wagmi integration',
 }
 
 const sections = [
-  { id: 'instalacao', title: 'Instalação' },
-  { id: 'configuracao', title: 'Configuração' },
-  { id: 'primeiro-uso', title: 'Primeiro uso' },
-  { id: 'demo', title: 'Demo ao vivo' },
-  { id: 'problemas-comuns', title: 'Problemas comuns' },
+  { id: 'installation', title: 'Installation' },
+  { id: 'configuration', title: 'Configuration' },
+  { id: 'first-use', title: 'First use' },
+  { id: 'demo', title: 'Live demo' },
+  { id: 'troubleshooting', title: 'Troubleshooting' },
 ] as const
 
 function Section({ id, title, children }: { id: string; title: string; children: ReactNode }) {
@@ -33,37 +33,37 @@ export default function IntegrationPage() {
     <div className="flex gap-10">
       <article className="max-w-3xl min-w-0 flex-1 space-y-10">
         <header className="space-y-2">
-          <p className="font-mono text-xs text-muted-foreground">Começando</p>
-          <h1 className="text-3xl font-semibold tracking-tight">Integração com wagmi</h1>
+          <p className="font-mono text-xs text-muted-foreground">Getting started</p>
+          <h1 className="text-3xl font-semibold tracking-tight">wagmi integration</h1>
           <p className="text-muted-foreground">
-            {/* TODO(brenda): parágrafo de abertura */}
+            {/* TODO(brenda): intro paragraph */}
           </p>
         </header>
 
-        <Section id="instalacao" title="Instalação">
+        <Section id="installation" title="Installation">
           <PackageTabs packages={['wagmi', 'viem@2.x', '@tanstack/react-query']} />
-          {/* TODO(brenda): conectores do wagmi v3 são peer deps: @walletconnect/ethereum-provider, @coinbase/wallet-sdk */}
+          {/* TODO(brenda): wagmi v3 connectors are peer deps: @walletconnect/ethereum-provider, @coinbase/wallet-sdk */}
         </Section>
 
-        <Section id="configuracao" title="Configuração">
-          {/* TODO(brenda): config/wagmi.ts, providers.tsx, layout.tsx com cookieToInitialState */}
+        <Section id="configuration" title="Configuration">
+          {/* TODO(brenda): config/wagmi.ts, providers.tsx, layout.tsx with cookieToInitialState */}
         </Section>
 
-        <Section id="primeiro-uso" title="Primeiro uso">
-          {/* TODO(brenda): ConnectButton + TransactionButton com approve + deposit (ERC-4626) */}
+        <Section id="first-use" title="First use">
+          {/* TODO(brenda): ConnectButton + TransactionButton with approve + deposit (ERC-4626) */}
         </Section>
 
-        <Section id="demo" title="Demo ao vivo">
+        <Section id="demo" title="Live demo">
           <LiveDemo />
         </Section>
 
-        <Section id="problemas-comuns" title="Problemas comuns">
-          {/* TODO(brenda): hydration mismatch, chain não configurada, rate limit do RPC público, ABI sem as const */}
+        <Section id="troubleshooting" title="Troubleshooting">
+          {/* TODO(brenda): hydration mismatch, chain not configured, public RPC rate limits, ABI without as const */}
         </Section>
       </article>
 
-      <nav aria-label="Nesta página" className="sticky top-22 hidden h-fit w-44 shrink-0 lg:block">
-        <p className="mb-2 text-xs font-medium text-muted-foreground">Nesta página</p>
+      <nav aria-label="On this page" className="sticky top-22 hidden h-fit w-44 shrink-0 lg:block">
+        <p className="mb-2 text-xs font-medium text-muted-foreground">On this page</p>
         <ul className="space-y-1.5 text-sm">
           {sections.map((s) => (
             <li key={s.id}>

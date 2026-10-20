@@ -1,7 +1,7 @@
 'use client'
 
 export type ChainSelectProps = {
-  /** Padrão: todas de config.chains (useChains no wagmi v3). */
+  /** Default: every chain in config.chains (useChains in wagmi v3). */
   chainIds?: readonly number[]
   className?: string
 }
@@ -9,8 +9,8 @@ export type ChainSelectProps = {
 /**
  * TODO(brenda):
  *  - useChains() + useSwitchChain().mutate (wagmi v3)
- *  - chain atual não suportada → mostrar "Rede não suportada" em destaque
- *  - nunca usar wallet_addEthereumChain com RPC vindo de fora da config
+ *  - unsupported current chain → highlight "Unsupported network"
+ *  - never call wallet_addEthereumChain with an RPC from outside the config
  */
 export function ChainSelect(props: ChainSelectProps) {
   void props

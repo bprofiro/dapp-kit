@@ -9,7 +9,7 @@ type CopyButtonProps = {
   className?: string
 }
 
-export function CopyButton({ value, label = 'Copiar', className }: CopyButtonProps) {
+export function CopyButton({ value, label = 'Copy', className }: CopyButtonProps) {
   const [copied, setCopied] = useState(false)
 
   async function copy() {
@@ -18,7 +18,7 @@ export function CopyButton({ value, label = 'Copiar', className }: CopyButtonPro
       setCopied(true)
       window.setTimeout(() => setCopied(false), 1500)
     } catch {
-      // clipboard bloqueado (iframe/permissão); TODO(brenda): fallback visual
+      // clipboard blocked (iframe/permissions); TODO(brenda): visual fallback
     }
   }
 
@@ -31,9 +31,9 @@ export function CopyButton({ value, label = 'Copiar', className }: CopyButtonPro
         className,
       )}
     >
-      <span aria-hidden="true">{copied ? 'Copiado' : label}</span>
+      <span aria-hidden="true">{copied ? 'Copied' : label}</span>
       <span className="sr-only" aria-live="polite">
-        {copied ? 'Copiado para a área de transferência' : label}
+        {copied ? 'Copied to clipboard' : label}
       </span>
     </button>
   )

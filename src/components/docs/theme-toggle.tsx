@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 type Theme = 'light' | 'dark'
 
 export function ThemeToggle() {
-  // null até montar: evita hydration mismatch (o servidor não sabe o tema)
+  // null until mounted: avoids a hydration mismatch (the server doesn't know the theme)
   const [theme, setTheme] = useState<Theme | null>(null)
 
   useEffect(() => {
@@ -18,7 +18,7 @@ export function ThemeToggle() {
     try {
       localStorage.setItem('theme', next)
     } catch {
-      // storage indisponível: o tema vale só para esta visita
+      // storage unavailable: the theme only lasts for this visit
     }
     setTheme(next)
   }
@@ -27,10 +27,10 @@ export function ThemeToggle() {
     <button
       type="button"
       onClick={toggle}
-      aria-label={theme === 'dark' ? 'Usar tema claro' : 'Usar tema escuro'}
+      aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
       className="rounded-md border px-2.5 py-1.5 text-xs text-muted-foreground hover:text-foreground"
     >
-      {theme === null ? 'Tema' : theme === 'dark' ? 'Claro' : 'Escuro'}
+      {theme === null ? 'Theme' : theme === 'dark' ? 'Light' : 'Dark'}
     </button>
   )
 }

@@ -7,7 +7,7 @@ const config = [
   {
     rules: {
       '@typescript-eslint/no-explicit-any': 'error',
-      // texto de terceiros (symbol, reason de revert, nome de carteira) nunca vira HTML
+      // third-party text (token symbol, revert reason, wallet name) never becomes HTML
       'react/no-danger': 'error',
     },
   },

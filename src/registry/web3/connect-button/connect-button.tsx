@@ -7,14 +7,14 @@ import type { Connector } from 'wagmi'
 export type ConnectButtonState = 'disconnected' | 'connecting' | 'connected' | 'wrong-chain'
 
 export type ConnectButtonProps = Omit<ComponentPropsWithoutRef<'button'>, 'children' | 'onClick'> & {
-  /** Padrão: "Conectar carteira" */
+  /** Default: "Connect wallet" */
   label?: ReactNode
-  /** Padrão: 'ens' com fallback para o endereço. */
+  /** Default: 'ens', falling back to the address. */
   accountDisplay?: 'address' | 'ens' | 'ens-avatar'
   showBalance?: boolean
-  /** Padrão: 'icon' */
+  /** Default: 'icon' */
   showChain?: boolean | 'icon'
-  /** Filtrar/ordenar conectores mostrados no modal. */
+  /** Filter/sort the connectors shown in the dialog. */
   connectors?: (connectors: readonly Connector[]) => readonly Connector[]
   onConnect?: (info: { address: Address; chainId: number }) => void
   onDisconnect?: () => void
@@ -22,14 +22,15 @@ export type ConnectButtonProps = Omit<ComponentPropsWithoutRef<'button'>, 'child
 
 /**
  * TODO(brenda):
- *  - useConnection() (wagmi v3; antes era useAccount)
- *  - desconectado → abre <WalletDialog>; conectado → <AccountMenu>
- *  - chain atual fora de config.chains → estado 'wrong-chain' (botão de alerta)
- *  - expor data-state no <button> para estilização
- *  - ENS: exibir só nome com resolução reversa VERIFICADA (nome → endereço tem
- *    que voltar ao mesmo endereço). Confirme se o getEnsName da sua versão do
- *    viem já faz esse forward-check; se não, resolva com useEnsAddress e compare.
- *    Nunca mostre ENS sem o endereço por perto em telas de envio.
+ *  - useConnection() (wagmi v3; previously useAccount)
+ *  - disconnected → opens <WalletDialog>; connected → <AccountMenu>
+ *  - current chain not in config.chains → 'wrong-chain' state (warning button)
+ *  - expose data-state on the <button> for styling
+ *  - ENS: only show a name whose reverse resolution is VERIFIED (name → address
+ *    must resolve back to the same address). Check whether getEnsName in your
+ *    viem version already does this forward check; if not, resolve with
+ *    useEnsAddress and compare.
+ *    Never show an ENS name without the address nearby on send screens.
  */
 export function ConnectButton(props: ConnectButtonProps) {
   void props

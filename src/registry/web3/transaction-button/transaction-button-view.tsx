@@ -4,26 +4,26 @@ import { cn } from '@/lib/cn'
 import type { TransactionButtonLabels, TransactionButtonViewProps, TransactionState } from './types'
 
 /**
- * Parte puramente visual. Recebe o estado pronto, não fala com a carteira.
- * É o que a demo usa no modo mock.
+ * Purely visual part. Receives a ready-made state; never talks to the wallet.
+ * This is what the demo uses in mock mode.
  */
 
 const defaultLabels: Required<Omit<TransactionButtonLabels, 'ready'>> = {
-  disconnected: 'Conectar carteira',
-  checking: 'Verificando…',
-  'wrong-chain': 'Trocar de rede',
-  'insufficient-balance': 'Saldo insuficiente',
-  'needs-approval': 'Aprovar',
-  'approve-signing': 'Confirme na carteira…',
-  'approve-pending': 'Aprovando…',
-  signing: 'Confirme na carteira…',
-  pending: 'Processando…',
-  success: 'Concluído',
-  rejected: 'Tentar novamente',
-  error: 'Tentar novamente',
+  disconnected: 'Connect wallet',
+  checking: 'Checking…',
+  'wrong-chain': 'Switch network',
+  'insufficient-balance': 'Insufficient balance',
+  'needs-approval': 'Approve',
+  'approve-signing': 'Confirm in wallet…',
+  'approve-pending': 'Approving…',
+  signing: 'Confirm in wallet…',
+  pending: 'Processing…',
+  success: 'Done',
+  rejected: 'Try again',
+  error: 'Try again',
 }
 
-/** Estados em que o clique não faz nada. */
+/** States where clicking does nothing. */
 const inert = new Set<TransactionState['status']>([
   'checking',
   'insufficient-balance',
@@ -50,20 +50,20 @@ export function TransactionButtonView({
       type="button"
       {...props}
       data-status={state.status}
-      // aria-disabled em vez de disabled: o botão mantém o foco durante a transação
+      // aria-disabled instead of disabled: the button keeps focus during the transaction
       aria-disabled={isInert || undefined}
       aria-busy={state.status === 'checking' || state.status.endsWith('pending') || state.status.endsWith('signing') || undefined}
       onClick={() => {
         if (!isInert) onAction()
       }}
       className={cn(
-        // TODO(brenda): estilos finais por data-status (ver design)
+        // TODO(brenda): final per-data-status styles (see design)
         'inline-flex h-11 min-w-44 items-center justify-center gap-2 rounded-md px-4 text-sm font-medium',
         'bg-primary text-primary-foreground aria-disabled:cursor-not-allowed',
         className,
       )}
     >
-      {/* TODO(brenda): ícone/spinner por estado */}
+      {/* TODO(brenda): per-state icon/spinner */}
       <span>{label}</span>
     </button>
   )

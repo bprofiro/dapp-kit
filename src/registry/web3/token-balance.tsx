@@ -3,9 +3,9 @@
 import type { Address } from 'viem'
 
 export type TokenBalanceProps = {
-  /** 'native' para o token nativo da chain. */
+  /** 'native' for the chain's native token. */
   token: Address | 'native'
-  /** Padrão: conta conectada. */
+  /** Default: connected account. */
   account?: Address
   chainId?: number
   showSymbol?: boolean
@@ -14,12 +14,12 @@ export type TokenBalanceProps = {
 
 /**
  * TODO(brenda):
- *  - wagmi v3 removeu balance.formatted: formatar com formatUnits + Intl
- *  - symbol/name vêm do contrato (dados de terceiro): texto puro, cortar
- *    tamanho, nunca virar link. Tokens de spam usam o symbol para phishing
+ *  - wagmi v3 removed balance.formatted: format with formatUnits + Intl
+ *  - symbol/name come from the contract (third-party data): plain text,
+ *    length-capped, never a link. Spam tokens use the symbol for phishing
  *    ("VISIT-claim-site.xyz").
- *  - logos: só de uma lista de tokens que VOCÊ controla; nada de URL vinda do contrato
- *  - skeleton enquanto carrega; "—" quando desconectado
+ *  - logos: only from a token list YOU control; never a URL coming from the contract
+ *  - skeleton while loading; "—" when disconnected
  */
 export function TokenBalance(props: TokenBalanceProps) {
   void props

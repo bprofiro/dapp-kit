@@ -1,10 +1,10 @@
-# Configurações do pnpm para um projeto que mexe com carteiras.
-# Ataques recentes de supply chain no npm miraram justamente frontends cripto.
+# pnpm settings for a project that talks to wallets.
+# Recent npm supply-chain attacks specifically targeted crypto frontends.
 
-# Não instala versões publicadas há menos de 24h (dá tempo de uma versão
-# maliciosa ser detectada e removida). Requer pnpm >= 10.16.
+# Don't install versions published less than 24h ago (gives a malicious
+# release time to be detected and pulled). Requires pnpm >= 10.16.
 minimumReleaseAge: 1440
 
-# Scripts de instalação (postinstall etc.) ficam bloqueados por padrão no pnpm 10.
-# Libere aqui só o que você revisou.
+# Install scripts (postinstall, etc.) are blocked by default in pnpm 10.
+# Only allow what you have reviewed.
 onlyBuiltDependencies: []

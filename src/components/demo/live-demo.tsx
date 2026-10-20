@@ -5,15 +5,15 @@ import { TransactionButtonView } from '@/registry/web3/transaction-button/transa
 import type { TransactionState, TransactionStatus } from '@/registry/web3/transaction-button/types'
 
 /**
- * Demo da página de integração.
- * Modo mock: a MESMA view do componente real, alimentada por estados de exemplo.
+ * Demo for the integration page.
+ * Mock mode: the SAME view as the real component, fed with sample states.
  *
  * TODO(brenda):
- *  - seletor de estados acessível (radiogroup) ao lado do botão
- *  - "Simular fluxo completo": percorre needs-approval → … → success com
- *    tempos realistas (respeitando prefers-reduced-motion)
- *  - aba "Carteira real" com o TransactionButton de verdade numa testnet
- *  - deixar claro na UI que o modo mock não assina nada
+ *  - accessible state picker (radiogroup) next to the button
+ *  - "Simulate full flow": steps through needs-approval → … → success with
+ *    realistic timing (respecting prefers-reduced-motion)
+ *  - "Real wallet" tab with the actual TransactionButton on a testnet
+ *  - make it clear in the UI that mock mode never signs anything
  */
 
 const sampleHash = '0x5c504ed432cb51138bcf09aa5e8a410dd4a1e204ef84bfed1be16dfba1b22060' as const
@@ -43,8 +43,8 @@ export const mockStates: { [S in TransactionStatus]: StateFor<S> } = {
     status: 'error',
     error: {
       kind: 'reverted',
-      title: 'A transação seria revertida',
-      description: 'O vault está pausado (EnforcedPause).',
+      title: 'Transaction would revert',
+      description: 'The vault is paused (EnforcedPause).',
       cause: null,
     },
   },
@@ -56,7 +56,7 @@ export function LiveDemo() {
   return (
     <div className="rounded-md border bg-card p-6">
       <TransactionButtonView state={mockStates[status]} onAction={() => {}}>
-        Depositar 250 USDC
+        Deposit 250 USDC
       </TransactionButtonView>
     </div>
   )

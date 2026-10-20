@@ -1,9 +1,9 @@
 import { isAddress, isHash, type Address, type Chain, type Hash } from 'viem'
 
 /**
- * Monta links de explorer SÓ a partir da config da chain (nunca de input do
- * usuário, query string ou resposta de RPC) e valida o hash/endereço antes.
- * Retorna undefined quando não dá para montar um link seguro.
+ * Builds explorer links ONLY from the chain config (never from user input,
+ * query strings or RPC responses) and validates the hash/address first.
+ * Returns undefined when a safe link can't be built.
  */
 export function buildExplorerTxUrl(chain: Chain | undefined, hash: Hash): string | undefined {
   const base = chain?.blockExplorers?.default.url

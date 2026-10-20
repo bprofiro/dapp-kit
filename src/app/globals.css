@@ -1,12 +1,12 @@
 @import 'tailwindcss';
 
-/* `dark:` do Tailwind segue o data-theme aplicado no <html> */
+/* Tailwind's `dark:` follows the data-theme set on <html> */
 @custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
 
 /*
- * Tokens do kit. Os nomes seguem o shadcn/ui para o kit encaixar em temas
- * existentes; --success, --warning e --pending são extras do kit.
- * Os valores são os mesmos do design (ver "UI do kit" no design).
+ * Kit tokens. Names follow shadcn/ui so the kit drops into existing themes;
+ * --success, --warning and --pending are kit additions.
+ * Values match the design file.
  */
 :root {
   --radius: 0.5rem;
@@ -116,7 +116,7 @@
     outline: 2px solid var(--ring);
     outline-offset: 2px;
   }
-  /* valores e endereços sempre com dígitos de largura fixa */
+  /* amounts and addresses always use fixed-width digits */
   .tabular {
     font-variant-numeric: tabular-nums slashed-zero;
   }

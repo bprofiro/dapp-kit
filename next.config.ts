@@ -1,16 +1,16 @@
 import type { NextConfig } from 'next'
 
 /**
- * Cabeçalhos de segurança da página de docs/demo.
+ * Security headers for the docs/demo site.
  *
- * Em dApp, o mais importante aqui é `frame-ancestors 'none'`: impede que
- * outro site carregue sua página num iframe invisível e engane o usuário
- * para clicar em "Confirmar" (clickjacking).
+ * For a dApp, the most important one is `frame-ancestors 'none'`: it stops
+ * another site from loading your page in an invisible iframe and tricking the
+ * user into clicking "Confirm" (clickjacking).
  *
- * TODO(brenda): CSP completa com nonce para scripts. Precisa listar em
- * connect-src os RPCs e o relay do WalletConnect (wss://relay.walletconnect.com,
+ * TODO(brenda): full CSP with a nonce for scripts. connect-src must list the
+ * RPCs and the WalletConnect relay (wss://relay.walletconnect.com,
  * https://rpc.walletconnect.com, https://explorer-api.walletconnect.com …).
- * Comece em modo report-only e aperte depois.
+ * Start in report-only mode and tighten later.
  */
 const securityHeaders = [
   { key: 'Content-Security-Policy', value: "frame-ancestors 'none'; base-uri 'self'; object-src 'none'" },

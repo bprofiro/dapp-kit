@@ -2,14 +2,14 @@ import { CopyButton } from './copy-button'
 
 type CodeBlockProps = {
   code: string
-  /** Nome do arquivo mostrado no cabeçalho, ex.: "config/wagmi.ts" */
+  /** File name shown in the header, e.g. "config/wagmi.ts" */
   title?: string
   lang?: 'ts' | 'tsx' | 'bash' | 'json' | 'css'
 }
 
 /**
- * TODO(brenda): realce de sintaxe com Shiki no servidor (sem JS no cliente),
- * com tema claro/escuro via CSS variables.
+ * TODO(brenda): server-side syntax highlighting with Shiki (no client JS),
+ * light/dark theme via CSS variables.
  */
 export function CodeBlock({ code, title, lang = 'ts' }: CodeBlockProps) {
   return (

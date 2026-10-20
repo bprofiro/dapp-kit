@@ -1,6 +1,6 @@
 /**
- * Subconjunto do ERC-4626 usado nos exemplos. Para ERC-20 use `erc20Abi` do viem.
- * `as const` é o que faz o TypeScript inferir functionName e args.
+ * Subset of ERC-4626 used in the examples. For ERC-20, use viem's `erc20Abi`.
+ * `as const` is what lets TypeScript infer functionName and args.
  */
 export const erc4626Abi = [
   {

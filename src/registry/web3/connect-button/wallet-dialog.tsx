@@ -9,19 +9,19 @@ export type WalletDialogProps = {
 }
 
 /**
- * Modal de conexão (Radix Dialog).
+ * Connect dialog (Radix Dialog).
  *
  * TODO(brenda):
- *  - lista: useConnectors() (wagmi v3; useConnect().connectors foi removido)
- *  - carteiras EIP-6963 vêm com connector.icon: é uma data URI fornecida pela
- *    própria extensão. Renderizar SÓ em <img src>, nunca com
- *    dangerouslySetInnerHTML/inline SVG (data:image/svg+xml em <img> não executa script)
- *  - aceitar só ícones que começam com "data:image/" (descartar http(s) e javascript:)
- *  - WalletConnect: ouvir o evento 'display_uri' do connector e desenhar o QR
- *    localmente; nunca mandar o URI para um serviço externo gerar o QR
- *  - mobile: em vez de QR, botão que abre o deep link do URI
- *  - estados: lista → conectando (com "Cancelar") → erro (com "Tentar de novo")
- *  - texto fixo no rodapé: "Nunca peça nem digite sua frase de recuperação"
+ *  - list: useConnectors() (wagmi v3; useConnect().connectors was removed)
+ *  - EIP-6963 wallets come with connector.icon: a data URI supplied by the
+ *    extension itself. Render it ONLY via <img src>, never with
+ *    dangerouslySetInnerHTML/inline SVG (data:image/svg+xml inside <img> can't run scripts)
+ *  - only accept icons starting with "data:image/" (drop http(s) and javascript:)
+ *  - WalletConnect: listen to the connector's 'display_uri' event and render the
+ *    QR locally; never send the URI to an external service to generate the QR
+ *  - mobile: instead of a QR, a button that opens the URI's deep link
+ *  - states: list → connecting (with "Cancel") → error (with "Try again")
+ *  - fixed footer copy: "Never share or type your recovery phrase"
  */
 export function WalletDialog(props: WalletDialogProps) {
   void props

@@ -10,7 +10,7 @@ import type {
 
 type WriteMutability = 'nonpayable' | 'payable'
 
-/** Todos os estados possíveis do botão. Cada um carrega só o que precisa. */
+/** Every state the button can be in. Each one carries only what it needs. */
 export type TransactionState =
   | { status: 'disconnected' }
   | { status: 'checking' }
@@ -22,7 +22,7 @@ export type TransactionState =
   | { status: 'ready' }
   | { status: 'signing' }
   | { status: 'pending'; hash: Hash }
-  // o receipt completo vai para onSuccess; o estado guarda só o que a UI mostra
+  // the full receipt goes to onSuccess; the state keeps only what the UI shows
   | { status: 'success'; hash: Hash; blockNumber: bigint }
   | { status: 'rejected' }
   | { status: 'error'; error: ReadableTxError }
@@ -38,11 +38,11 @@ export type ReadableTxErrorKind =
 
 export type ReadableTxError = {
   kind: ReadableTxErrorKind
-  /** Frase curta, ex.: "A transação seria revertida" */
+  /** Short sentence, e.g. "Transaction would revert" */
   title: string
-  /** Explicação legível, ex.: "O vault está pausado (EnforcedPause)" */
+  /** Readable explanation, e.g. "The vault is paused (EnforcedPause)" */
   description: string
-  /** Erro original, só para log. Nunca renderize isto na UI. */
+  /** Original error, for logging only. Never render this in the UI. */
   cause: unknown
 }
 
@@ -51,10 +51,10 @@ export type ApprovalConfig = {
   spender: Address
   amount: bigint
   /**
-   * 'exact' (padrão) aprova só o valor da operação.
-   * 'max' aprova maxUint256: menos assinaturas, mas se o spender for
-   * comprometido, o saldo inteiro do token fica exposto. Só use se o
-   * integrador pedir explicitamente.
+   * 'exact' (default) approves only the amount of this operation.
+   * 'max' approves maxUint256: fewer signatures, but if the spender is ever
+   * compromised, the user's whole token balance is exposed. Only use it when
+   * the integrator explicitly asks for it.
    */
   mode?: 'exact' | 'max'
 }
@@ -64,7 +64,7 @@ export type BalanceRequirement = {
   amount: bigint
 }
 
-/** O que é preciso para executar a chamada (o mesmo formato do writeContract do wagmi). */
+/** What is needed to execute the call (same shape as wagmi's writeContract). */
 export type ContractCall<
   abi extends Abi,
   functionName extends ContractFunctionName<abi, WriteMutability>,
@@ -74,7 +74,7 @@ export type ContractCall<
   functionName: functionName
   args: ContractFunctionArgs<abi, WriteMutability, functionName>
   value?: bigint
-  /** Obrigatório: é o que define o estado "rede errada". */
+  /** Required: it's what defines the 'wrong-chain' state. */
   chainId: number
 }
 
@@ -84,35 +84,35 @@ export type TransactionFlowOptions<
 > = ContractCall<abi, functionName> & {
   approval?: ApprovalConfig
   requires?: BalanceRequirement
-  /** Simula antes de pedir assinatura. Padrão: true. */
+  /** Simulate before asking for a signature. Default: true. */
   simulate?: boolean
-  /** Confirmações a esperar. Padrão: 1. */
+  /** Confirmations to wait for. Default: 1. */
   confirmations?: number
   onSubmitted?: (hash: Hash) => void
   onSuccess?: (receipt: TransactionReceipt) => void
   onError?: (error: ReadableTxError) => void
-  /** Override de mensagens por app (retorne undefined para usar o padrão). */
+  /** Per-app message override (return undefined to fall back to the default). */
   formatError?: (error: unknown) => ReadableTxError | undefined
-  /** Volta para 'ready' depois do sucesso (ms). Padrão: false. */
+  /** Return to 'ready' after success (ms). Default: false. */
   resetAfter?: number | false
 }
 
 export type TransactionFlow = {
   state: TransactionState
-  /** Ação do clique no estado atual (conectar, trocar rede, aprovar, enviar, tentar de novo). */
+  /** Click action for the current state (connect, switch chain, approve, submit, retry). */
   run: () => void
   reset: () => void
 }
 
 export type TransactionButtonLabels = Partial<Record<TransactionStatus, ReactNode>>
 
-// 'value' sai porque colide com o value (bigint) da chamada ao contrato
+// 'value' is omitted because it clashes with the contract call's value (bigint)
 type NativeButtonProps = Omit<ComponentPropsWithoutRef<'button'>, 'onClick' | 'onError' | 'children' | 'value'>
 
 export type TransactionButtonViewProps = NativeButtonProps & {
   state: TransactionState
   onAction: () => void
-  /** Rótulo no estado 'ready'. */
+  /** Label in the 'ready' state. */
   children: ReactNode
   labels?: TransactionButtonLabels
 }
@@ -124,6 +124,6 @@ export type TransactionButtonProps<
   NativeButtonProps & {
     children: ReactNode
     labels?: TransactionButtonLabels
-    /** Padrão: chain.blockExplorers.default da config. */
+    /** Default: chain.blockExplorers.default from the config. */
     explorerUrl?: (hash: Hash, chainId: number) => string | undefined
   }

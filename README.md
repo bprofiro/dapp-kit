@@ -1,55 +1,67 @@
-# dapp-kit — casca
+# dapp-kit
 
-Esqueleto do kit: configuração, providers, tipos e arquivos vazios dos componentes.
-A lógica dos componentes é sua — cada arquivo tem um bloco `TODO(brenda)` com o que
-falta e as regras de segurança que aquele componente precisa respeitar.
+React components for Web3 frontends, built on wagmi and viem. Like shadcn/ui, you copy
+the component source into your own project instead of depending on a closed package.
 
-## Rodar
+> **Status: scaffold.** Configuration, providers, types and empty component files are in
+> place. Each component file has a `TODO(brenda)` block listing what is missing and the
+> security rules that component must follow.
+
+## Stack
+
+Next.js (App Router) · TypeScript (strict) · Tailwind CSS 4 · wagmi 3 · viem 2 · TanStack Query 5
+
+## Getting started
+
+Requires Node.js 20.9+ and pnpm 10.16+ (`corepack enable pnpm` on Node 20–24, or `npm install -g pnpm@10`).
 
 ```bash
-cp .env.example .env.local   # preencha o projectId do WalletConnect
+cp .env.example .env.local   # fill in your WalletConnect projectId
 pnpm install
-pnpm dev                     # abre em /docs/integration
+pnpm dev                     # opens /docs/integration
 pnpm typecheck
 ```
 
-As versões no `package.json` usam `^` nas majors atuais (wagmi 3, viem 2, Next 16,
-TanStack Query 5, Tailwind 4). O `pnpm install` gera o lockfile com as versões exatas —
-**commite o lockfile**. Rode `pnpm outdated` para conferir se há algo mais novo.
+`package.json` uses `^` ranges on the current majors. `pnpm install` writes the exact
+versions to the lockfile — **commit the lockfile**. Run `pnpm outdated` to check for newer releases.
 
-## O que já está pronto
+## What is ready
 
-| Arquivo | Estado |
+| File | Status |
 | --- | --- |
-| `src/config/wagmi.ts` | Pronto. Ethereum, Base, Arbitrum; injected (EIP-6963), WalletConnect, Coinbase; SSR com cookie |
-| `src/app/providers.tsx`, `src/app/layout.tsx` | Prontos. `cookieToInitialState` evita hydration mismatch |
-| `src/app/globals.css` | Tokens claro/escuro (mesmos valores do design), foco visível, reduced motion |
-| `next.config.ts` | Cabeçalhos de segurança (anti-clickjacking etc.). CSP completa é TODO |
-| `pnpm-workspace.yaml`, `.npmrc` | Proteções de supply chain (idade mínima de release, versões exatas) |
-| `src/registry/web3/transaction-button/types.ts` | API completa (estados, props) |
-| `src/registry/web3/lib/explorer.ts` | Pronto. Links de explorer validados |
-| `src/registry/abis/erc4626.ts` | ABI `as const` |
-| `src/components/docs/*` | Copy button, abas de pacote (ARIA tabs), callout, toggle de tema funcionais; realce de sintaxe é TODO |
+| `src/config/wagmi.ts` | Ready. Ethereum, Base, Arbitrum; injected (EIP-6963), WalletConnect, Coinbase Wallet; cookie-based SSR |
+| `src/app/providers.tsx`, `src/app/layout.tsx` | Ready. `cookieToInitialState` prevents hydration mismatches |
+| `src/app/globals.css` | Light/dark tokens, visible focus, reduced motion |
+| `next.config.ts` | Security headers (anti-clickjacking, etc.). Full CSP is a TODO |
+| `pnpm-workspace.yaml`, `.npmrc` | Supply-chain safeguards (minimum release age, exact versions) |
+| `src/registry/web3/transaction-button/types.ts` | Full API (states, props) |
+| `src/registry/web3/lib/explorer.ts` | Ready. Validated explorer links |
+| `src/registry/abis/erc4626.ts` | ABI with `as const` |
+| `src/components/docs/*` | Copy button, package-manager tabs (ARIA tabs), callout and theme toggle work; syntax highlighting is a TODO |
 
-## O que é seu (TODOs)
+## What is left (TODOs)
 
-- `use-transaction-flow.ts` — a máquina de estados
-- `transaction-button-view.tsx` — visual por estado (já tem `data-status` e `aria-disabled`)
-- `transaction-status.tsx` — mensagens `aria-live` e link do explorer
-- `lib/parse-tx-error.ts` — erros do viem em texto legível
-- `connect-button/*` — botão, modal de carteiras, menu da conta
+- `use-transaction-flow.ts` — the state machine
+- `transaction-button-view.tsx` — per-state visuals (already exposes `data-status` and `aria-disabled`)
+- `transaction-status.tsx` — `aria-live` messages and explorer link
+- `lib/parse-tx-error.ts` — viem errors to readable text
+- `connect-button/*` — button, wallet dialog, account menu
 - `address.tsx`, `token-balance.tsx`, `chain-select.tsx`, `token-amount-input.tsx`
-- `components/demo/live-demo.tsx` — seletor de estados e "simular fluxo"
-- Conteúdo da página `src/app/docs/integration/page.tsx`
-- As páginas `/docs/components/*` do menu ainda não existem
+- `components/demo/live-demo.tsx` — state picker and "simulate full flow"
+- Content of `src/app/docs/integration/page.tsx`
+- The `/docs/components/*` pages linked from the sidebar don't exist yet
 
-## Regras de segurança do kit (resumo)
+## Security rules
 
-1. Nenhum dado de terceiro vira HTML ou link: `symbol`, `name`, motivo de revert,
-   nome/ícone de carteira. Texto puro, com tamanho máximo. (`react/no-danger` está como erro no ESLint.)
-2. O que é simulado é o que é assinado: enviar `simulate.data.request`.
-3. Approve exato por padrão. `maxUint256` só com opt-in explícito.
-4. Endereço completo e checksum em telas de confirmação; copiar sempre do valor, não do texto.
-5. Links de explorer só a partir da config da chain (`lib/explorer.ts`).
-6. Ícones de carteira só como `<img src="data:image/...">`.
-7. Nada de CDN em runtime; dependências mínimas, lockfile commitado.
+1. Third-party data never becomes HTML or a link: token `symbol`, `name`, revert reasons,
+   wallet names and icons. Plain text, length-capped. (`react/no-danger` is an ESLint error.)
+2. What is simulated is what gets signed: send `simulate.data.request`.
+3. Exact approvals by default. `maxUint256` only with an explicit opt-in.
+4. Full checksummed address on confirmation screens; copy from the value, never from the rendered text.
+5. Explorer links are built only from the chain config (`lib/explorer.ts`).
+6. Wallet icons only as `<img src="data:image/...">`.
+7. No runtime CDNs; minimal dependencies; commit the lockfile.
+
+## License
+
+TBD.

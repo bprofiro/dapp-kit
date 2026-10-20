@@ -23,12 +23,12 @@ const mono = IBM_Plex_Mono({
 
 export const metadata: Metadata = {
   title: { default: 'dApp Kit', template: '%s · dApp Kit' },
-  description: 'Componentes React para frontends Web3.',
+  description: 'React components for Web3 frontends.',
 }
 
 /**
- * Aplica o tema antes da primeira pintura (evita flash).
- * TODO(brenda): quando a CSP com nonce entrar, passar o nonce para esta tag.
+ * Applies the theme before first paint (prevents a flash).
+ * TODO(brenda): once the nonce-based CSP lands, pass the nonce to this tag.
  */
 const themeScript = `(function(){try{var t=localStorage.getItem('theme');var d=t==='dark'||(t!=='light'&&matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.dataset.theme=d?'dark':'light'}catch(e){}})()`
 
@@ -36,9 +36,9 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   const initialState = cookieToInitialState(getConfig(), (await headers()).get('cookie'))
 
   return (
-    <html lang="pt-BR" className={`${sans.variable} ${mono.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${sans.variable} ${mono.variable}`} suppressHydrationWarning>
       <head>
-        {/* conteúdo fixo, sem dado externo: único uso permitido de dangerouslySetInnerHTML */}
+        {/* static content, no external data: the only allowed use of dangerouslySetInnerHTML */}
         {/* eslint-disable-next-line react/no-danger */}
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>

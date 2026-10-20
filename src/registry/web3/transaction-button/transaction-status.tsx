@@ -10,16 +10,16 @@ type TransactionStatusProps = {
 }
 
 /**
- * Região aria-live que anuncia as mudanças de estado e mostra o link do explorer.
- * Fica FORA do botão: mudança de texto dentro do próprio botão é anunciada de
- * forma inconsistente entre leitores de tela.
+ * aria-live region that announces state changes and shows the explorer link.
+ * It lives OUTSIDE the button: text changes inside the button itself are
+ * announced inconsistently across screen readers.
  *
  * TODO(brenda):
- *  - mensagem por estado (pending: "Transação enviada. Aguardando confirmação.")
- *  - erro: mostrar error.title + error.description, nunca error.cause
- *  - link do explorer com rel="noopener noreferrer" e target="_blank",
- *    montado só por buildExplorerTxUrl (lib/explorer.ts)
- *  - use role="status" para progresso; role="alert" só para erro
+ *  - message per state (pending: "Transaction submitted. Waiting for confirmation.")
+ *  - error: show error.title + error.description, never error.cause
+ *  - explorer link with rel="noopener noreferrer" and target="_blank",
+ *    built only by buildExplorerTxUrl (lib/explorer.ts)
+ *  - role="status" for progress; role="alert" only for errors
  */
 export function TransactionStatus({ state, explorerUrl, className }: TransactionStatusProps) {
   void explorerUrl

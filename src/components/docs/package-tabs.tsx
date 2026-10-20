@@ -20,9 +20,9 @@ type PackageTabsProps = {
 }
 
 /**
- * Abas pnpm/npm/yarn/bun com o padrão ARIA de tabs (setas trocam de aba).
- * TODO(brenda): lembrar a escolha (localStorage com try/catch) e sincronizar
- * entre todos os blocos da página.
+ * pnpm/npm/yarn/bun tabs following the ARIA tabs pattern (arrow keys switch tabs).
+ * TODO(brenda): remember the choice (localStorage with try/catch) and sync it
+ * across every block on the page.
  */
 export function PackageTabs({ packages, dev = false }: PackageTabsProps) {
   const [active, setActive] = useState<Manager>('pnpm')
@@ -43,7 +43,7 @@ export function PackageTabs({ packages, dev = false }: PackageTabsProps) {
   return (
     <div className="overflow-hidden rounded-md border bg-card">
       <div className="flex items-center justify-between border-b px-1">
-        <div role="tablist" aria-label="Gerenciador de pacotes" className="flex" onKeyDown={onKeyDown}>
+        <div role="tablist" aria-label="Package manager" className="flex" onKeyDown={onKeyDown}>
           {managers.map((manager) => (
             <button
               key={manager}

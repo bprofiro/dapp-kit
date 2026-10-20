@@ -7,8 +7,8 @@ import type { TransactionButtonProps } from './types'
 import { useTransactionFlow } from './use-transaction-flow'
 
 /**
- * Componente composto: hook (lógica) + view (visual) + status (aria-live).
- * Quem quiser outra UI usa useTransactionFlow direto.
+ * Composite component: hook (logic) + view (visuals) + status (aria-live).
+ * For a different UI, use useTransactionFlow directly.
  */
 export function TransactionButton<
   const abi extends Abi,

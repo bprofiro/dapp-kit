@@ -3,14 +3,14 @@ import { arbitrum, base, mainnet } from 'wagmi/chains'
 import { coinbaseWallet, injected, walletConnect } from 'wagmi/connectors'
 
 /**
- * Sem 'use client': este arquivo é importado também pelo layout (server)
- * para ler o cookie e montar o initialState.
+ * No 'use client': this file is also imported by the (server) layout to read
+ * the cookie and build the initialState.
  */
 
 const projectId = process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID
 const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000'
 
-/** RPC dedicado primeiro; RPC público da chain como fallback. */
+/** Dedicated RPC first; the chain's public RPC as fallback. */
 function rpc(url: string | undefined): Transport {
   return url ? fallback([http(url), http()]) : http()
 }
@@ -20,8 +20,8 @@ export const chains = [mainnet, base, arbitrum] as const
 export function getConfig() {
   return createConfig({
     chains,
-    // EIP-6963: carteiras instaladas se anunciam sozinhas (MetaMask, Rabby…).
-    // Já é true por padrão; deixado explícito porque o modal depende disso.
+    // EIP-6963: installed wallets announce themselves (MetaMask, Rabby…).
+    // It's already true by default; explicit because the wallet dialog relies on it.
     multiInjectedProviderDiscovery: true,
     connectors: [
       injected(),
@@ -29,12 +29,12 @@ export function getConfig() {
         ? [
             walletConnect({
               projectId,
-              // O kit desenha o próprio QR; não carrega o modal do WalletConnect.
+              // The kit renders its own QR code; don't load WalletConnect's modal.
               showQrModal: false,
               metadata: {
                 name: 'dApp Kit',
-                description: 'Componentes React para dApps',
-                url: appUrl, // precisa bater com o domínio real (Verify API)
+                description: 'React components for dApps',
+                url: appUrl, // must match the real domain (Verify API)
                 icons: [`${appUrl}/icon.png`],
               },
             }),

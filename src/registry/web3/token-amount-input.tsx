@@ -6,12 +6,12 @@ export type TokenAmountInputProps = {
   token: Address | 'native'
   decimals: number
   symbol: string
-  /** Valor em unidades base (wei). undefined = vazio. */
+  /** Value in base units (wei). undefined = empty. */
   value: bigint | undefined
   onValueChange: (value: bigint | undefined) => void
-  /** Padrão: saldo da conta conectada. */
+  /** Default: connected account's balance. */
   max?: bigint
-  /** Para token nativo: quanto reservar para gás ao clicar em MAX. */
+  /** For the native token: how much to keep for gas when MAX is clicked. */
   gasReserve?: bigint
   label?: string
   id?: string
@@ -20,11 +20,11 @@ export type TokenAmountInputProps = {
 
 /**
  * TODO(brenda):
- *  - guardar a string digitada e converter com parseUnits (nunca float)
- *  - aceitar vírgula e ponto como separador decimal; rejeitar mais casas que `decimals`
- *  - inputMode="decimal", não type="number"
- *  - MAX: valor exato do saldo em bigint (menos gasReserve se nativo)
- *  - erro de saldo ligado ao input por aria-describedby + aria-invalid
+ *  - keep the typed string and convert with parseUnits (never floats)
+ *  - accept both comma and dot as decimal separator; reject more decimals than `decimals`
+ *  - inputMode="decimal", not type="number"
+ *  - MAX: exact balance as bigint (minus gasReserve for native)
+ *  - balance error tied to the input via aria-describedby + aria-invalid
  */
 export function TokenAmountInput(props: TokenAmountInputProps) {
   void props

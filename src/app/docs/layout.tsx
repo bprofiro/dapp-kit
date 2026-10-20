@@ -4,11 +4,11 @@ import { ThemeToggle } from '@/components/docs/theme-toggle'
 
 const nav = [
   {
-    title: 'Começando',
-    items: [{ href: '/docs/integration', label: 'Integração com wagmi' }],
+    title: 'Getting started',
+    items: [{ href: '/docs/integration', label: 'wagmi integration' }],
   },
   {
-    title: 'Componentes',
+    title: 'Components',
     items: [
       { href: '/docs/components/connect-button', label: 'ConnectButton' },
       { href: '/docs/components/transaction-button', label: 'TransactionButton' },
@@ -21,8 +21,8 @@ const nav = [
 ] as const
 
 /**
- * TODO(brenda): menu mobile (sheet), item ativo com aria-current="page",
- * link "Pular para o conteúdo".
+ * TODO(brenda): mobile menu (sheet), active item with aria-current="page",
+ * "Skip to content" link.
  */
 export default function DocsLayout({ children }: { children: ReactNode }) {
   return (
@@ -34,7 +34,7 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
         <ThemeToggle />
       </header>
       <div className="mx-auto flex max-w-6xl gap-10 px-4 md:px-6">
-        <nav aria-label="Documentação" className="sticky top-14 hidden h-[calc(100dvh-3.5rem)] w-56 shrink-0 overflow-y-auto py-8 md:block">
+        <nav aria-label="Documentation" className="sticky top-14 hidden h-[calc(100dvh-3.5rem)] w-56 shrink-0 overflow-y-auto py-8 md:block">
           {nav.map((group) => (
             <div key={group.title} className="mb-6">
               <p className="mb-2 text-xs font-medium tracking-wide text-muted-foreground uppercase">{group.title}</p>
@@ -50,7 +50,7 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
             </div>
           ))}
         </nav>
-        <main id="conteudo" className="min-w-0 flex-1 py-8">
+        <main id="content" className="min-w-0 flex-1 py-8">
           {children}
         </main>
       </div>

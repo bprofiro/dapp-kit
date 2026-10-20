@@ -4,11 +4,11 @@ import type { Address as AddressType } from 'viem'
 
 export type AddressProps = {
   address: AddressType
-  /** Padrão: true. Mostra o nome ENS (com verificação) quando houver. */
+  /** Default: true. Shows the (verified) ENS name when available. */
   ens?: boolean
-  /** Padrão: true */
+  /** Default: true */
   copyable?: boolean
-  /** 'short' em listas; 'full' em telas de confirmação/envio. Padrão: 'short'. */
+  /** 'short' in lists; 'full' on confirmation/send screens. Default: 'short'. */
   variant?: 'short' | 'full'
   explorerLink?: boolean
   className?: string
@@ -16,10 +16,10 @@ export type AddressProps = {
 
 /**
  * TODO(brenda):
- *  - sempre normalizar com getAddress (checksum) antes de exibir/copiar
- *  - variant 'short' usa shortenAddress (6+4, ver lib/format.ts)
- *  - title/aria-label com o endereço completo
- *  - feedback de cópia via aria-live ("Endereço copiado")
+ *  - always normalize with getAddress (checksum) before displaying/copying
+ *  - 'short' variant uses shortenAddress (6+4, see lib/format.ts)
+ *  - title/aria-label with the full address
+ *  - copy feedback via aria-live ("Address copied")
  */
 export function Address(props: AddressProps) {
   void props
